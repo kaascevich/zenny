@@ -9,9 +9,9 @@
     ./security.nix
     ./users.nix
 
-    ./boot/module.nix
-    ./services/module.nix
-    ./home-manager/module.nix
+    ./boot
+    ./home
+    ./services
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

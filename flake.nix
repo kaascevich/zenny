@@ -26,13 +26,15 @@
       system = "x86_64-linux";
       modules = with inputs; [
         disko.nixosModules.disko
-        impermanence.nixosModules.impermanence
-        impermanence.nixosModules.home-manager
         home-manager.nixosModules.home-manager
         lanzaboote.nixosModules.lanzaboote
+        (with impermanence; [
+          nixosModules.impermanence
+          homeManagerModules.home-manager
+        ])
 
         ./disks.nix
-        ./config/module.nix
+        ./config
       ];
     };
   };
