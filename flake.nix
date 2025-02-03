@@ -29,8 +29,8 @@
         home-manager.nixosModules.home-manager
         lanzaboote.nixosModules.lanzaboote
 
-        impermanencenixosModules.impermanence
-        impermanencehomeManagerModules.impermanence
+        impermanence.nixosModules.impermanence
+        impermanence.homeManagerModules.impermanence
 
 
         ./disks.nix
