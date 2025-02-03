@@ -30,7 +30,7 @@
         lanzaboote.nixosModules.lanzaboote
         (with impermanence; [
           nixosModules.impermanence
-          homeManagerModules.home-manager
+          homeManagerModules.impermanence
         ])
 
         ./disks.nix
