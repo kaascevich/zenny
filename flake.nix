@@ -27,6 +27,7 @@
       modules = with inputs; [
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
+        impermanence.nixosModules.home-manager
         home-manager.nixosModules.home-manager
         lanzaboote.nixosModules.lanzaboote
 

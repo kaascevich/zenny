@@ -6,6 +6,7 @@
     ];
 
     programs.home-manager.enable = true;
+    home.homeDirectory = "/home/kaleb";
     home.stateVersion = "24.11";
   };
 }
