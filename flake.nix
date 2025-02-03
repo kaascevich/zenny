@@ -28,10 +28,10 @@
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         lanzaboote.nixosModules.lanzaboote
-        (with impermanence; [
-          nixosModules.impermanence
-          homeManagerModules.impermanence
-        ])
+
+        impermanencenixosModules.impermanence
+        impermanencehomeManagerModules.impermanence
+
 
         ./disks.nix
         ./config
