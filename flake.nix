@@ -26,10 +26,20 @@
       system = "x86_64-linux";
       modules = with inputs; [
         disko.nixosModules.disko
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-        impermanence.homeManagerModules.impermanence
+
         lanzaboote.nixosModules.lanzaboote
+
+        impermanence.nixosModules.impermanence
+        (impermanence + "/home-manager.nix")
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.kaleb = import ./home;
+          };
+        }
 
         ./disks.nix
         ./config
