@@ -24,23 +24,14 @@
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.zenny = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-        inputs.disko.nixosModules.disko
-        inputs.impermanence.nixosModules.impermanence
-        inputs.home-manager.nixosModules.home-manager
-        inputs.lanzaboote.nixosModules.lanzaboote
+      modules = with inputs; [
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
+        home-manager.nixosModules.home-manager
+        lanzaboote.nixosModules.lanzaboote
 
         ./disks.nix
-        ./hardware.nix
-        ./config.nix
-
-        ./config/boot.nix
-        ./config/impermanence.nix
-        ./config/networking.nix
-        ./config/nixpkgs.nix
-        ./config/users.nix
-        
-        ./config/services/services.nix
+        ./config/module.nix
       ];
     };
   };

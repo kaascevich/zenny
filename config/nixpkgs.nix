@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   nixpkgs = {
-    config.allowUnfree = true;
+    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
     hostPlatform = lib.mkDefault "x86_64-linux";
   };
 }

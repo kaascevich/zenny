@@ -2,7 +2,7 @@
   disko.devices = {
     disk.internal = {
       type = "disk";
-      device = "/dev/nvme1n1";
+      device = "/dev/nvme1n1"; # will be overwritten
       content = {
         type = "gpt";
         partitions = {
