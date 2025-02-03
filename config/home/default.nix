@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  home-manager.users.kaleb = { config, lib, pkgs, ... }: {
+  home-manager.users.kaleb = { ... }: {
     imports = [
       ./hyprland.nix
       ./persistence.nix

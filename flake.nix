@@ -21,17 +21,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.zenny = nixpkgs.lib.nixosSystem {
+  outputs = { self, pkgs, ... }@inputs: {
+    nixosConfigurations.zenny = pkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = with inputs; [
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        lanzaboote.nixosModules.lanzaboote
-
         impermanence.nixosModules.impermanence
-        impermanence.homeManagerModules.impermanence
-
+        lanzaboote.nixosModules.lanzaboote
 
         ./disks.nix
         ./config
