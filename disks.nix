@@ -64,7 +64,7 @@
         fsType = "tmpfs";
         mountOptions = [ "defaults" "size=2G" "mode=755" ];
       };
-      "/home" = {
+      "/home/kaleb" = {
         fsType = "tmpfs";
         mountOptions = [ "defaults" "size=4G" "mode=777" ];
       };
