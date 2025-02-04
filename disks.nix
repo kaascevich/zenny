@@ -66,7 +66,7 @@
       };
       "/home" = {
         fsType = "tmpfs";
-        mountOptions = [ "defaults" "size=2G" "mode=777" ];
+        mountOptions = [ "defaults" "size=4G" "mode=777" ];
       };
     };
   };
