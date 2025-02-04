@@ -31,7 +31,7 @@
         lanzaboote.nixosModules.lanzaboote
 
         impermanence.nixosModules.impermanence
-        impermanence.homeManagerModules.impermanence
+        # impermanence.homeManagerModules.impermanence
 
         home-manager.nixosModules.home-manager
         # { home-manager = {
