@@ -31,13 +31,17 @@
         lanzaboote.nixosModules.lanzaboote
 
         impermanence.nixosModules.default
-        impermanence.homeManagerModules.default
 
         home-manager.nixosModules.home-manager
         { home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.kaleb = import ./config/home;
+          users.kaleb = {
+            imports = [
+              impermanence.homeManagerModules.default
+              ./config/home
+            ];
+          };
         }; }
 
         ./config
