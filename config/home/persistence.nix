@@ -1,5 +1,4 @@
-{ config, lib, pkgs, impermanence, ... }: {
-  modules = [ impermanence.homeManagerModules.default ];
+{ config, lib, pkgs, ... }: {
   home.persistence."/persist/home/kaleb" = {
     directories = [
       "Documents"
