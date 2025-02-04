@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ./hyprland.nix
-    # ./persistence.nix
+    # ./hyprland.nix
+    ./persistence.nix
   ];
 
   programs.home-manager.enable = true;
