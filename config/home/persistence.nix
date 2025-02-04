@@ -3,6 +3,7 @@
     allowOther = true;
     directories = [
       "Documents"
+      "Downloads"
       "Photos"
       "Music"
       "Videos"
