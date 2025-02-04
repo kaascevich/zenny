@@ -26,22 +26,30 @@
       system = "x86_64-linux";
       modules = with inputs; [
         disko.nixosModules.disko
+        ./disks.nix
 
         lanzaboote.nixosModules.lanzaboote
 
         impermanence.nixosModules.impermanence
-        (impermanence + "/home-manager.nix")
+        impermanence.homeManagerModules.impermanence
 
         home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.kaleb = import ./home;
-          };
-        }
+        { home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          # users.kaleb = import ./home;
+          users.kaleb = {
+            home.persistence."/persist/home/kaleb" = {
+              directories = [
+                "Documents"
+                "Photos"
+                "Music"
+                "Videos"
+              ];
+            };
+          }
+        }; }
 
-        ./disks.nix
         ./config
       ];
     };
