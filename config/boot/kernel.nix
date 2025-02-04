@@ -6,6 +6,8 @@
       "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"
     ];
 
+    kernel.sysctl."kernel.sysrq" = "502";
+
     loader.efi.canTouchEfiVariables = true;
   };
 }
