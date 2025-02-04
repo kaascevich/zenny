@@ -1,8 +1,8 @@
 {
   disko.devices = {
-    disk.internal = {
+    disk.main = {
       type = "disk";
-      device = "/dev/nvme1n1"; # will be overwritten
+      device = "/dev/disk/by-id/some-disk-id"; # will be overwritten
       content = {
         type = "gpt";
         partitions = {
