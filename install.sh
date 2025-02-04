@@ -10,4 +10,4 @@ diskName="$1"
 sudo nix \
   --experimental-features "nix-command flakes" \
   run "github:nix-community/disko/latest#disko-install" -- \
-  --flake .#zenny --disk main "/dev/$diskName"
+  --flake .#zenny --disk main "$diskName"
