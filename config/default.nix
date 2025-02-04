@@ -10,7 +10,6 @@
     ./users.nix
 
     ./boot
-    ./home
     ./services
   ];
 

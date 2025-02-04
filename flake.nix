@@ -37,7 +37,7 @@
         # { home-manager = {
         #   useGlobalPkgs = true;
         #   useUserPackages = true;
-        #   # users.kaleb = import ./home;
+        #   # users.kaleb = import ./config/home;
         # }; }
 
         ./config
