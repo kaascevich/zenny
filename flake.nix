@@ -38,16 +38,6 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           # users.kaleb = import ./home;
-          users.kaleb = {
-            home.persistence."/persist/home/kaleb" = {
-              directories = [
-                "Documents"
-                "Photos"
-                "Music"
-                "Videos"
-              ];
-            };
-          };
         }; }
 
         ./config
