@@ -7,6 +7,8 @@ if [ $# -ne 1 ]; then
 fi
 diskName="$1"
 
+sudo mount -o remount,size=12G,noatime /nix/.rw-store
+
 sudo nix \
   --experimental-features "nix-command flakes" \
   run "github:nix-community/disko/latest#disko-install" -- \
