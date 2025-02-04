@@ -34,11 +34,11 @@
         # impermanence.homeManagerModules.impermanence
 
         home-manager.nixosModules.home-manager
-        # { home-manager = {
-        #   useGlobalPkgs = true;
-        #   useUserPackages = true;
-        #   # users.kaleb = import ./config/home;
-        # }; }
+        { home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.kaleb = import ./config/home;
+        }; }
 
         ./config
       ];
