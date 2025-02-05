@@ -12,8 +12,8 @@ if [[ $# -ne 1 ]]; then
 fi
 diskName="$1"
 
-mount -o remount,size=12G,noatime /nix/.rw-store
+mount -o remount,size=12Gz,noatime /nix/.rw-store
 
-nix --experimental-features "nix-command flakes pipe-operator" \
+nix --extra-experimental-features "nix-command flakes pipe-operator" \
   run "github:nix-community/disko/latest#disko-install" -- \
   --flake .#zenny --disk main "$diskName"
