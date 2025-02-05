@@ -15,7 +15,7 @@ delete_subvolumes() {
   for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
     delete_subvolumes "/btrfs_tmp/$i"
   done
-
+  btrfs subvolume delete "$1"
 }
 
 while IFS= read -r -d '' i; do
