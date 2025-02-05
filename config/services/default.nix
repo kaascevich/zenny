@@ -2,6 +2,7 @@
   imports = [
     ./audio.nix
     ./hyprland.nix
+    ./power.nix
   ];
 
   services = {
