@@ -37,16 +37,23 @@
                 type = "btrfs";
                 extraArgs = [ "-L" "root" "-f" ];
                 subvolumes = let
-                  compress = "compress-force=zstd";
-                  noatime = "noatime";
+                  options = subvol: [
+                    "subvol=${subvol}"
+                    "compress-force=zstd"
+                    "noatime"
+                  ];
                 in {
+                  "/" = { # will be wiped on every boot
+                    mountpoint = "/";
+                    mountOptions = options "root"
+                  };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = [ "subvol=nix" compress noatime ];
+                    mountOptions = options "nix"
                   };
                   "/persist" = {
                     mountpoint = "/persist";
-                    mountOptions = [ "subvol=persist" compress noatime ];
+                    mountOptions = options "persist"
                   };
                   "/swap" = {
                     mountpoint = "/swap";
@@ -59,16 +66,16 @@
         };
       };
     };
-    nodev = {
-      "/" = {
-        fsType = "tmpfs";
-        mountOptions = [ "defaults" "size=2G" "mode=755" ];
-      };
-      "/home/kaleb" = {
-        fsType = "tmpfs";
-        mountOptions = [ "defaults" "size=4G" "mode=777" ];
-      };
-    };
+    # nodev = {
+    #   "/" = {
+    #     fsType = "tmpfs";
+    #     mountOptions = [ "defaults" "size=2G" "mode=755" ];
+    #   };
+    #   "/home/kaleb" = {
+    #     fsType = "tmpfs";
+    #     mountOptions = [ "defaults" "size=4G" "mode=777" ];
+    #   };
+    # };
   };
 
   fileSystems = {
