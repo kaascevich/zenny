@@ -2,7 +2,11 @@
   security = {
     tpm2.enable = true;
 
+    # doas
     sudo.enable = false;
-    doas.enable = true;
+    doas = {
+      enable = true;
+      extraRules = [{ persist = true; }];
+    };
   };
 }
