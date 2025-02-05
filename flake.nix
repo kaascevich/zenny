@@ -21,7 +21,7 @@
     #};
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: with ./personal.nix; {
     nixosConfigurations.zenny = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = with inputs; [
@@ -36,7 +36,7 @@
         { home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.kaleb = {
+          users.${username} = {
             imports = [
               impermanence.homeManagerModules.default
               ./config/home

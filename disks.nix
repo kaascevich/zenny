@@ -66,16 +66,6 @@
         };
       };
     };
-    # nodev = {
-    #   "/" = {
-    #     fsType = "tmpfs";
-    #     mountOptions = [ "defaults" "size=2G" "mode=755" ];
-    #   };
-    #   "/home/kaleb" = {
-    #     fsType = "tmpfs";
-    #     mountOptions = [ "defaults" "size=4G" "mode=777" ];
-    #   };
-    # };
   };
 
   fileSystems = {

@@ -1,8 +1,8 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: with ../personal.nix; {
   users = {
     mutableUsers = false;
-    users.kaleb = {
-      description = "Kaleb A. Ascevich";
+    users.${username} = {
+      description = fullName;
       isNormalUser = true;
 
       extraGroups = [ "wheel" "networkmanager" ];

@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }: {
-  home.persistence."/persist/home/kaleb" = {
+{ config, lib, pkgs, ... }: with ../../personal.nix; {
+  home.persistence."/persist/home/${username}" = {
     allowOther = true;
     directories = [
       "Documents"
