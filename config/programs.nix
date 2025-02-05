@@ -2,5 +2,5 @@
   programs = {
     nushell.enable = true;
     git.enable = true;
-  }
+  };
 }
