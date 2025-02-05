@@ -17,7 +17,7 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "pipe-operator"
+    "pipe-operators"
   ];
   system.stateVersion = "24.11";
 }
