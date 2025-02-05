@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
-daysUntilDelete="7"
+daysUntilDelete=7
 
 mkdir /btrfs_tmp
 mount /dev/mapper/crypt /btrfs_tmp
