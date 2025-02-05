@@ -7,3 +7,8 @@
   - [x] Root
   - [x] Home
 - [ ] Hyprland
+- [x] Plymouth
+- [x] Nushell
+  - [ ] Starship Prompt
+- [x] NetworkManager
+- [ ] Nvidia Graphics
