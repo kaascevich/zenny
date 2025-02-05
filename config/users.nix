@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: with ../personal.nix; {
+{ config, lib, pkgs, ... }: with (import ../personal.nix); {
   users = {
     mutableUsers = false;
     users.${username} = {

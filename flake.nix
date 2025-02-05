@@ -21,7 +21,7 @@
     #};
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: with ./personal.nix; {
+  outputs = { self, nixpkgs, ... }@inputs: with (import ./personal.nix); {
     nixosConfigurations.zenny = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = with inputs; [

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: with ../../personal.nix; {
+{ config, lib, pkgs, ... }: with (import ../../personal.nix); {
   home.persistence."/persist/home/${username}" = {
     allowOther = true;
     directories = [

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: with ../../personal.nix; {
+{ config, lib, pkgs, ... }: with (import ../../personal.nix); {
   imports = [
     # ./hyprland.nix
     ./persistence.nix
