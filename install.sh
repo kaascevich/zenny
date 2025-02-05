@@ -14,6 +14,6 @@ diskName="$1"
 
 mount -o remount,size=12G,noatime /nix/.rw-store
 
-nix --experimental-features "nix-command flakes" \
+nix --experimental-features "nix-command flakes pipe-operator" \
   run "github:nix-community/disko/latest#disko-install" -- \
   --flake .#zenny --disk main "$diskName"
