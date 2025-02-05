@@ -18,9 +18,10 @@ delete_subvolumes() {
   btrfs subvolume delete "$1"
 }
 
-while IFS= read -r -d '' i; do
+# shellcheck disable=SC2044
+for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime "+$daysUntilDelete"); do
   delete_subvolumes "$i"
-done < <(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime "+$daysUntilDelete")
+done
 
 btrfs subvolume create /btrfs_tmp/root
 umount /btrfs_tmp
