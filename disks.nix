@@ -15,7 +15,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [ "defaults" ];
+              mountOptions = [ "defaults" "fmask=0137" "dmask=0027" ];
             };
           };
           primary = {
