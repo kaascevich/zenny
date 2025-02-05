@@ -45,15 +45,15 @@
                 in {
                   "/" = { # will be wiped on every boot
                     mountpoint = "/";
-                    mountOptions = options "root"
+                    mountOptions = options "root";
                   };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = options "nix"
+                    mountOptions = options "nix";
                   };
                   "/persist" = {
                     mountpoint = "/persist";
-                    mountOptions = options "persist"
+                    mountOptions = options "persist";
                   };
                   "/swap" = {
                     mountpoint = "/swap";
