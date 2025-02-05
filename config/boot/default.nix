@@ -2,7 +2,7 @@
   imports = [
     ./impermanence.nix
     ./kernel.nix
-    ./plymouth.nix
+    # ./plymouth.nix
     # ./secure-boot.nix
   ];
 
