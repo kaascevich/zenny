@@ -5,6 +5,7 @@
     ./locale.nix
     ./networking.nix
     ./nixpkgs.nix
+    ./packages.nix
     ./programs.nix
     ./security.nix
     ./users.nix
