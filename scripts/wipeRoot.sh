@@ -26,28 +26,34 @@ fi
 
 delete_subvolumes() {
   IFS=$(printf " \n\t")
-  for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-    delete_subvolumes "$mntdir/$i"
+  btrfs subvolume list -o "$1" | cut -f9 -d' ' | while read -r subvolume; do
+    delete_subvolumes "$mntdir/$subvolume"
   done
 
-  print_status "deleting subvolume $1..." "31"
+  print_status "deleting subvolume '$1'..." "31"
   btrfs subvolume delete "$1"
-  print_status "deleted subvolume $1" "1;31"
+  print_status "deleted subvolume '$1'" "1;31"
 }
 
-print_status "deleting root backups older than $days_until_delete days..." "31"
+delete_old_backups() {
+  print_status "deleting root backups older than $days_until_delete days..." "31"
 
-old_backups=$(
-  find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete"
-)
-# shellcheck disable=SC2086 # word splitting is exactly what we want here
-set -- $old_backups
-print_status "found $# backups" "31"
+  old_backups=$(
+    find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete"
+  )
 
-# shellcheck disable=SC2068
-for i in $@; do
-  delete_subvolumes "$i"
-done
+  # shellcheck disable=SC2086 # word splitting is exactly what we want here
+  set -- $old_backups
+  print_status "found $# old backups" "31"
+
+  # shellcheck disable=SC2068
+  for i in $@; do
+    delete_subvolumes "$i"
+  done
+}
+
+delete_old_backups
+delete_subvolumes "$mntdir/root"
 
 print_status "recreating root subvolume..." "33"
 btrfs subvolume create "$mntdir/root"
