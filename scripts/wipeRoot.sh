@@ -1,55 +1,56 @@
 # shellcheck shell=bash
 
-daysUntilDelete=7
+mntdir="/btrfs_tmp"
+days_until_delete="7"
 
-printStatus() {
+print_status() {
   message=$1
-  color=$2
-  printf "impermanence: \e[1;%sm%s\e[0m\n" "$color" "$message"
+  escape=$2
+  printf "impermanence: \e[%sm%s\e[0m\n" "$escape" "$message"
 }
 
-printStatus "mounting..." 33
-mkdir /btrfs_tmp
-mount /dev/mapper/crypt /btrfs_tmp
+print_status "mounting..." "33"
+mkdir "$mntdir"
+mount /dev/mapper/crypt "$mntdir"
 
-if [[ -e /btrfs_tmp/root ]]; then
-  printStatus "backing up root..." 33
+if [[ -e "$mntdir/root" ]]; then
+  print_status "backing up root..." "33"
 
-  mkdir -p /btrfs_tmp/old_roots
-  timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-  path="/btrfs_tmp/old_roots/$timestamp"
-  mv /btrfs_tmp/root "$path"
+  mkdir -p "$mntdir/old_roots"
+  timestamp=$(date --date="@$(stat -c %Y "$mntdir/root")" "+%Y-%m-%-d_%H:%M:%S")
+  path="$mntdir/old_roots/$timestamp"
+  mv "$mntdir/root" "$path"
 
-  printStatus "backed up root to $path" 32
+  print_status "backed up root to $path" "1;32"
 fi
 
 delete_subvolumes() {
   IFS=$'\n'
   for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-    delete_subvolumes "/btrfs_tmp/$i"
+    delete_subvolumes "$mntdir/$i"
   done
 
-  printStatus "deleting subvolume $1..." 31
+  print_status "deleting subvolume $1..." "31"
   btrfs subvolume delete "$1"
-  printStatus "deleted subvolume $1" 31
+  print_status "deleted subvolume $1" "1;31"
 }
 
-printStatus "deleting root backups older than $daysUntilDelete days..." 31
+print_status "deleting root backups older than $days_until_delete days..." "31"
 
-# shellcheck disable=SC2044
-for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime "+$daysUntilDelete"); do
+# shellcheck disable=SC2207
+old_backups=(
+  $(find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete")
+)
+print_status "found ${#old_backups[@]} backups" "31"
+for i in "${old_backups[@]}"; do
   delete_subvolumes "$i"
 done
 
-printStatus "deleting root subvolume..." 31
-delete_subvolumes "/btrfs_tmp/root/"
-printStatus "deleted root subvolume" 31
+print_status "recreating root subvolume..." "33"
+btrfs subvolume create "$mntdir/root"
+print_status "recreated root subvolume" "1;33"
 
-printStatus "recreating root subvolume..." 33
-btrfs subvolume create /btrfs_tmp/root
-printStatus "recreated root subvolume" 33
+print_status "unmounting..." "33"
+umount "$mntdir"
 
-printStatus "unmounting..." 33
-umount /btrfs_tmp
-
-printStatus "wipe complete! resuming boot..." 32
+print_status "wipe complete! resuming boot..." "1;32"
