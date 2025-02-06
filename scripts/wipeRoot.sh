@@ -31,7 +31,7 @@ delete_subvolumes() {
   done
 
   print_status "deleting subvolume '$1'..." "31"
-  btrfs subvolume delete "$1"
+  btrfs subvolume delete "$1" > /dev/null
   print_status "deleted subvolume '$1'" "1;31"
 }
 
@@ -56,7 +56,7 @@ delete_old_backups
 delete_subvolumes "$mntdir/root"
 
 print_status "recreating root subvolume..." "33"
-btrfs subvolume create "$mntdir/root"
+btrfs subvolume create "$mntdir/root" > /dev/null
 print_status "recreated root subvolume" "1;33"
 
 print_status "unmounting..." "33"
