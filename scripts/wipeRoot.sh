@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=busybox
 
 mntdir="/btrfs_tmp"
 days_until_delete="7"
@@ -25,7 +25,7 @@ if [[ -e "$mntdir/root" ]]; then
 fi
 
 delete_subvolumes() {
-  IFS=$'\n'
+  IFS=$(printf " \n\t")
   for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
     delete_subvolumes "$mntdir/$i"
   done
@@ -37,12 +37,15 @@ delete_subvolumes() {
 
 print_status "deleting root backups older than $days_until_delete days..." "31"
 
-# shellcheck disable=SC2207
-old_backups=(
-  $(find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete")
+old_backups=$(
+  find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete"
 )
-print_status "found ${#old_backups[@]} backups" "31"
-for i in "${old_backups[@]}"; do
+# shellcheck disable=SC2086 # word splitting is exactly what we want here
+set -- $old_backups
+print_status "found $# backups" "31"
+
+# shellcheck disable=SC2068
+for i in $@; do
   delete_subvolumes "$i"
 done
 
