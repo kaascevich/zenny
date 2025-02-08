@@ -1,6 +1,7 @@
 # shellcheck shell=busybox
 
-pause_boot=true
+DEBUG=true
+if $DEBUG; then set +x; fi
 
 mntdir="/btrfs_tmp"
 days_until_delete="7"
@@ -59,7 +60,7 @@ btrfs subvolume create "$mntdir/root" > /dev/null
 print_status "unmounting..." "32"
 umount "$mntdir"
 
-if $pause_boot; then
+if $DEBUG; then
   print_status "wipe complete! press enter to resume boot..." "1;32"
   read -r -p "" _
 else
