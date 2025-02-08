@@ -14,7 +14,7 @@
       root = {
         home = "/home/root";
         createHome = true;
-      }
+      };
     };
   };
 }
