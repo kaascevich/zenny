@@ -61,7 +61,7 @@ umount "$mntdir"
 
 if $pause_boot; then
   print_status "wipe complete! press enter to resume boot..." "1;32"
-  read -p -r _
+  read -r -p "" _
 else
   print_status "wipe complete! resuming boot..." "1;32"
 fi
