@@ -12,7 +12,7 @@
         shell = pkgs.nushell;
       };
       root = {
-        home = "/home/root";
+        home = lib.mkForce "/home/root";
         createHome = true;
       };
     };
