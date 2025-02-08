@@ -12,3 +12,4 @@
   - [ ] Starship Prompt
 - [x] NetworkManager
 - [ ] Nvidia Graphics
+- [ ] Config synced with this GitHub repo
