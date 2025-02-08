@@ -3,7 +3,6 @@
 DEBUG="true"
 [[ $DEBUG == "true" ]] && set -x
 
-mntdir="/btrfs_tmp"
 days_until_delete="7"
 
 print_status() {
@@ -13,22 +12,22 @@ print_status() {
 }
 
 print_status "mounting..." "32"
-mkdir "$mntdir"
-mount /dev/mapper/crypt "$mntdir"
+mkdir -p /mnt
+mount -o subvol=/ /dev/mapper/crypt /mnt
 
-if [[ -e "$mntdir/root" ]]; then
+if [[ -e "/mnt/root" ]]; then
   print_status "backing up root..." "32"
 
-  mkdir -p "$mntdir/old_roots"
-  timestamp=$(date --date="@$(stat -c %Y "$mntdir/root")" "+%Y-%m-%-d_%H:%M:%S")
-  path="$mntdir/old_roots/$timestamp"
-  mv "$mntdir/root" "$path"
+  timestamp=$(date --date="@$(stat -c %Y /mnt/root)" "+%Y-%m-%-d_%H:%M:%S")
+  path="/mnt/old_roots/$timestamp"
+  mkdir -p "$path"
+  mv /mnt/root/* "$path"
 fi
 
 delete_subvolumes() {
   IFS=$(printf " \n\t")
-  btrfs subvolume list -o "$1" | cut -f9 -d' ' | while read -r subvolume; do
-    delete_subvolumes "$mntdir/$subvolume"
+  btrfs subvolume list -o "$1" | cut -f 9 -d ' ' | while read -r subvolume; do
+    delete_subvolumes "/mnt/$subvolume"
   done
 
   print_status "deleting subvolume '$1'..." "32"
@@ -39,7 +38,7 @@ delete_old_backups() {
   print_status "deleting backups older than $days_until_delete days..." "32"
 
   old_backups=$(
-    find "$mntdir/old_roots/" -maxdepth 1 -mtime "+$days_until_delete"
+    find /mnt/old_roots/ -maxdepth 1 -mtime "+$days_until_delete"
   )
 
   # shellcheck disable=SC2086 # word splitting is exactly what we want here
@@ -52,12 +51,13 @@ delete_old_backups() {
 }
 
 delete_old_backups
+delete_subvolumes /mnt/root
 
 print_status "recreating root subvolume..." "32"
-btrfs subvolume create "$mntdir/root" > /dev/null
+btrfs subvolume create /mnt/root > /dev/null
 
 print_status "unmounting..." "32"
-umount "$mntdir"
+umount /mnt
 
 if [[ $DEBUG == "true" ]]; then
   print_status "wipe complete! press enter to resume boot..." "1;32"
