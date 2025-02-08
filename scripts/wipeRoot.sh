@@ -1,7 +1,7 @@
 # shellcheck shell=busybox
 
 DEBUG=true
-if $DEBUG; then set +x; fi
+if $DEBUG; then set -x; fi
 
 mntdir="/btrfs_tmp"
 days_until_delete="7"
