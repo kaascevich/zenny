@@ -35,7 +35,7 @@
               ];
               content = {
                 type = "btrfs";
-                extraArgs = [ "-L" "root" "-f" ];
+                extraArgs = [ "-L" "main" "-f" ];
                 subvolumes = let
                   options = subvol: [
                     "subvol=${subvol}"
@@ -51,6 +51,10 @@
                     mountpoint = "/nix";
                     mountOptions = options "nix";
                   };
+                  "/config" = {
+                    mountpoint = "/config";
+                    mountOptions = options "config";
+                  };
                   "/persist" = {
                     mountpoint = "/persist";
                     mountOptions = options "persist";
@@ -60,6 +64,8 @@
                     swap.swapfile.size = "16G";
                   };
                 };
+                postCreateHook =
+                  "btrfs subvolume snapshot -r /mnt/root /mnt/blankroot";
               };
             };
           };

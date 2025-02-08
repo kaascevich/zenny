@@ -5,7 +5,6 @@
     "/persist" = {
       directories = [
         # Nix stuff
-        "/etc/nixos"
         "/var/lib/nixos"
 
         # Wireless connections
