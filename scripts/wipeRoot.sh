@@ -1,7 +1,7 @@
 # shellcheck shell=busybox
 
-DEBUG=true
-if $DEBUG; then set -x; fi
+DEBUG="true"
+[[ $DEBUG == "true" ]] && set -x
 
 mntdir="/btrfs_tmp"
 days_until_delete="7"
@@ -52,7 +52,6 @@ delete_old_backups() {
 }
 
 delete_old_backups
-delete_subvolumes "$mntdir/root"
 
 print_status "recreating root subvolume..." "32"
 btrfs subvolume create "$mntdir/root" > /dev/null
@@ -60,7 +59,7 @@ btrfs subvolume create "$mntdir/root" > /dev/null
 print_status "unmounting..." "32"
 umount "$mntdir"
 
-if $DEBUG; then
+if [[ $DEBUG == "true" ]]; then
   print_status "wipe complete! press enter to resume boot..." "1;32"
   read -r -p "" _
 else
