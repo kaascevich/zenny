@@ -17,7 +17,7 @@ if [[ ! -e "$disk" ]]; then
   exit 1
 fi
 
-mount -o remount,size=14G,noatime /nix/.rw-store
+mount -o remount,size=12G,noatime /nix/.rw-store
 
 nix --experimental-features "nix-command flakes" \
   run "github:nix-community/disko/latest#disko-install" -- \
