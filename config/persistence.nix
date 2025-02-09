@@ -26,9 +26,7 @@
         ];
       };
     };
-    "/config" = {
-      hideMounts = true;
-      directories = [ "/etc/nixos" ];
-    };
   };
+
+  environment.etc."nixos/flake.nix".source = "/config/flake.nix";
 }
