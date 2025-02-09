@@ -43,9 +43,9 @@
                     "noatime"
                   ];
                 in {
-                  "/" = { # will be wiped on every boot
+                  "/rootfs" = { # will be wiped on every boot
                     mountpoint = "/";
-                    mountOptions = options "root";
+                    mountOptions = options "rootfs";
                   };
                   "/nix" = {
                     mountpoint = "/nix";
@@ -64,8 +64,6 @@
                     swap.swapfile.size = "16G";
                   };
                 };
-                postCreateHook =
-                  "btrfs subvolume snapshot -r /mnt/root /mnt/blankroot";
               };
             };
           };
