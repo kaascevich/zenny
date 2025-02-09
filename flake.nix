@@ -33,16 +33,15 @@
         impermanence.nixosModules.default
 
         home-manager.nixosModules.home-manager
-        { home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.${username} = {
-            imports = [
-              impermanence.homeManagerModules.default
-              ./config/home
-            ];
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} = {
+              imports = [ ./config/home ];
+            };
           };
-        }; }
+        }
 
         ./config
       ];
