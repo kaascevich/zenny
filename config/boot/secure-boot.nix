@@ -9,7 +9,13 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    sbctl # for Secure Boot maintenance
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      sbctl # for Secure Boot maintenance
+    ];
+
+    persistence."/persist".directories = [
+      "/var/lib/sbctl"
+    ];
+  };
 }
