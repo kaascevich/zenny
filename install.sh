@@ -17,7 +17,6 @@ if [[ ! -e "$disk" ]]; then
   exit 1
 fi
 
-
 mount -o remount,size=12G,noatime /nix/.rw-store
 
 nix --experimental-features "nix-command flakes" \
