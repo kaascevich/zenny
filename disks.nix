@@ -37,31 +37,22 @@
                 type = "btrfs";
                 extraArgs = [ "-L" "main" "-f" ];
                 subvolumes = let
-                  options = subvol: [
-                    "subvol=${subvol}"
-                    "compress-force=zstd"
-                    "noatime"
-                  ];
+                  subvolume = name: mountpoint: {
+                    inherit mountpoint;
+                    mountOptions = [
+                      "subvol=${name}"
+                      "compress-force=zstd"
+                      "noatime"
+                    ];
+                  };
                 in {
-                  "/rootfs" = { # will be wiped on every boot
-                    mountpoint = "/";
-                    mountOptions = options "rootfs";
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = options "nix";
-                  };
-                  "/config" = {
-                    mountpoint = "/config";
-                    mountOptions = options "config";
-                  };
-                  "/persist" = {
-                    mountpoint = "/persist";
-                    mountOptions = options "persist";
-                  };
+                  "/rootfs"  = subvolume "rootfs"  "/";
+                  "/nix"     = subvolume "nix"     "/nix";
+                  "/config"  = subvolume "config"  "/config";
+                  "/persist" = subvolume "persist" "/persist";
                   "/swap" = {
                     mountpoint = "/swap";
-                    swap.swapfile.size = "16G";
+                    swap.swapfile.size = 16 * 1024;
                   };
                 };
               };

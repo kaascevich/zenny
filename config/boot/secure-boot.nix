@@ -12,10 +12,8 @@
   environment = {
     systemPackages = with pkgs; [
       sbctl # for Secure Boot maintenance
+      tpm2-tss # for TPM2... things (don't know what this package actually is)
     ];
-
-    persistence."/persist".directories = [
-      "/var/lib/sbctl"
-    ];
+    persistence."/persist".directories = [ "/var/lib/sbctl" ];
   };
 }
