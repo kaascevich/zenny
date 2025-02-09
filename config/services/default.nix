@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ./audio.nix
-    ./hyprland.nix
     ./power.nix
   ];
 

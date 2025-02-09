@@ -12,7 +12,10 @@
     ];
     files = [
       "/etc/machine-id"
+
+      # Secure Boot
       "/etc/secureboot"
+      "/var/lib/sbctl"
     ];
 
     users.${username} = {

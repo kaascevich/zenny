@@ -1,24 +1,18 @@
 {
   description = "zenny config";
 
-  inputs = {
+  inputs = let
+    dependency = repo: {
+      url = "github:${repo}";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  in {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    impermanence = {
-      url = "github:nix-community/impermanence";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    #lanzaboote = {
-    #  url = github:nix-community/lanzaboote;
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    
+    disko = dependency "nix-community/disko";
+    impermanence = dependency "nix-community/impermanence";
+    home-manager = dependency "nix-community/home-manager";
+    lanzaboote = dependency "nix-community/lanzaboote";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: with (import ./personal.nix); {
@@ -28,10 +22,7 @@
         disko.nixosModules.disko
         ./disks.nix
 
-        #lanzaboote.nixosModules.lanzaboote
-
         impermanence.nixosModules.default
-
         home-manager.nixosModules.home-manager
         {
           home-manager = {
