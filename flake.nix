@@ -28,6 +28,8 @@
         disko.nixosModules.disko
         ./disks.nix
 
+        lanzaboote.nixosModules.lanzaboote
+
         impermanence.nixosModules.default
         home-manager.nixosModules.home-manager
         {
