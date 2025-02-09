@@ -30,7 +30,7 @@
                 "--perf-no_write_workqueue"
               ];
               settings.crypttabExtraOpts = [
-                "tmp2-device=auto"
+                "tpm2-device=auto"
                 "tpm2-measure-pcr=yes"
               ];
               content = {

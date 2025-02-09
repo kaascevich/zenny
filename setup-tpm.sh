@@ -8,7 +8,5 @@ fi
 disk=$(blkid | grep crypto | cut -d ":" -f 1)
 systemd-cryptenroll \
   --tpm2-device=auto \
-  `# --tpm2-pcrs="0+2+7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000"` \
-  --tpm2-pcrs="0+2+7" \
-  --tpm2-with-pin=true \
+  --tpm2-pcrs="0+2+7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000" \
   "$disk"
