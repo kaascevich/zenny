@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [[ $# -ne 1 ]]; then
-  echo "must provide one argument (/dev name of disk to install on)"
+  echo "must provide exactly one argument (/dev name of disk to install on)"
   exit 1
 fi
 disk="/dev/$1"
@@ -17,7 +17,7 @@ if [[ ! -e "$disk" ]]; then
   exit 1
 fi
 
-mount -o remount,size=12G,noatime /nix/.rw-store
+mount -o remount,size=14G,noatime /nix/.rw-store
 
 nix --experimental-features "nix-command flakes" \
   run "github:nix-community/disko/latest#disko-install" -- \
