@@ -66,5 +66,6 @@
   fileSystems = {
     "/nix".neededForBoot = true;
     "/persist".neededForBoot = true;
+    "/config".neededForBoot = true;
   };
 }
