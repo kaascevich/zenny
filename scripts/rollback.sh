@@ -42,4 +42,4 @@ btrfs subvolume create $mntdir/rootfs > /dev/null
 print_status "unmounting..."
 umount $mntdir
 
-print_status "wipe complete! resuming boot..."
+print_status "rollback complete! resuming boot..."
