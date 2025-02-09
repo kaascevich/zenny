@@ -27,7 +27,7 @@ delete_subvolumes() {
   done
 
   print_status "deleting subvolume '$1'..."
-  btrfs subvolume delete "$1"
+  btrfs subvolume delete "$1" > /dev/null
 }
 
 print_status "deleting backups older than $days_until_delete days..."
@@ -37,7 +37,7 @@ for i in $(find $mntdir/old_roots/ -maxdepth 1 -mtime +$days_until_delete); do
 done
 
 print_status "recreating root subvolume..."
-btrfs subvolume create $mntdir/rootfs
+btrfs subvolume create $mntdir/rootfs > /dev/null
 
 print_status "unmounting..."
 umount $mntdir
