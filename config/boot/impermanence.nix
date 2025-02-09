@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }: {
   boot.initrd.systemd.services.rollback = {
-    description = "Rollback root subvolume to a pristine state";
+    description = "Rollback root subvolume";
     wantedBy = [ "initrd.target" ];
-    after = [ "systemd-cryptsetup@enc.service" ]; # LUKS/TPM
+    after = [ "initrd-root-device.target" ];
     before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
