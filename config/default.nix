@@ -20,5 +20,6 @@
     "flakes"
     "pipe-operators"
   ];
+  environment.etc."nixos/flake.nix".source = "/config/flake.nix";
   system.stateVersion = "24.11";
 }

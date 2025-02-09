@@ -27,6 +27,4 @@
       };
     };
   };
-
-  environment.etc."nixos/flake.nix".source = "/config/flake.nix";
 }
