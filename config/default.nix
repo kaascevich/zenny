@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [
     ./catppuccin.nix
+    ./console.nix
     # ./graphics.nix
     ./hardware.nix
     ./locale.nix
