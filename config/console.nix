@@ -1,7 +1,11 @@
 { config, lib, pkgs, ... }: {
-  console = {
-    earlySetup = true;
-    packages = with pkgs; [ cascadia-code ];
-    font = "cascadia-code";
-  };
+  console.earlySetup = true;
+
+  services.kmscon = {
+    enable = true;
+    fonts = [{
+      name = "Cascadia Code";
+      package = pkgs.cascadia-code;
+    }];
+  }
 }
