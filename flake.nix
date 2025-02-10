@@ -19,6 +19,10 @@
      url = github:nix-community/lanzaboote;
      inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin = {
+     url = github:catppuccin/nix;
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: with (import ./personal.nix); {
@@ -28,16 +32,20 @@
         disko.nixosModules.disko
         ./disks.nix
 
+        catppuccin.nixosModules.catppuccin
         lanzaboote.nixosModules.lanzaboote
-
         impermanence.nixosModules.default
+
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             users.${username} = {
-              imports = [ ./config/home ];
+              imports = [
+                ./config/home
+                catppuccin.homeManagerModules.catppuccin
+              ];
             };
           };
         }
