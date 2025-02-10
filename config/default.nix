@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
+    ./console.nix
     # ./graphics.nix
     ./hardware.nix
     ./locale.nix

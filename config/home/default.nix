@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with (import ../../personal.nix); {
   imports = [
-    
+    ./shell.nix
   ];
 
   programs.home-manager.enable = true;
