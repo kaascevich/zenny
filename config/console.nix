@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   console = {
     earlySetup = true;
-    # packages = with pkgs; [ cascadia-code ];
-    # font = "cascadia-code";
+    packages = with pkgs; [ terminus_font ];
+    font = "ter-i32b";
   };
 }
