@@ -24,6 +24,9 @@
           "Music"
           "Videos"
         ];
+        files = [
+          ".config/nushell/history.txt"
+        ];
       };
     };
   };
