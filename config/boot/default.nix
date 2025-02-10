@@ -5,5 +5,8 @@
     ./secure-boot.nix
   ];
 
-  boot.initrd.systemd.enable = true;
+  boot = {
+    initrd.systemd.enable = true;
+    loader.systemd-boot.consoleMode = "max";
+  };
 }
