@@ -1,5 +1,8 @@
 $env.config = {
   show_banner: false,
+  table: {
+    mode: "compact"
+  }
   completions: {
     case_sensitive: false
     quick: true
